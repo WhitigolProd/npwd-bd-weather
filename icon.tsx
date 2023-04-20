@@ -1,11 +1,25 @@
 import React from 'react';
 
 export const AppIcon = () => {
-	return (
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-		     strokeWidth={2}>
-			<path strokeLinecap="round" strokeLinejoin="round"
-			      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-		</svg>
-	)
-}
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        d="M13,19H5c-2.8,0-5-2.2-5-5s2.2-5,5-5c0.5,0,1.1,0.1,1.6,0.3C7.6,6.7,10.1,5,13,5c3.9,0,7,3.1,7,7S16.9,19,13,19z M5,11
+	c-1.7,0-3,1.3-3,3s1.3,3,3,3h8c2.8,0,5-2.2,5-5s-2.2-5-5-5c-2.3,0-4.3,1.6-4.9,3.9c-0.1,0.3-0.3,0.6-0.6,0.7
+	c-0.3,0.1-0.6,0.1-0.9-0.1C6.1,11.2,5.6,11,5,11z"
+      />
+      <path
+        d="M2,8C1.4,8,1,7.6,1,7c0-3.3,2.7-6,6-6c1.3,0,2.6,0.4,3.6,1.2c0.4,0.3,0.5,1,0.2,1.4c-0.3,0.4-1,0.5-1.4,0.2
+	C8.7,3.3,7.9,3,7,3C4.8,3,3,4.8,3,7C3,7.6,2.6,8,2,8z"
+      />
+    </svg>
+  );
+};

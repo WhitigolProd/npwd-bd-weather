@@ -3,7 +3,7 @@ import { AppIcon } from './icon';
 
 const defaultLanguage = 'en';
 const localizedAppName = {
-  en: 'APP_NAME',
+  en: 'W_WEATHER_BD',
 };
 
 interface Settings {
@@ -12,11 +12,11 @@ interface Settings {
 
 export const path = '/npwd_app_template';
 export default (settings: Settings) => ({
-  id: 'APP_NAME',
+  id: 'W_WEATHER_BD',
   path,
   nameLocale: localizedAppName[settings?.language ?? defaultLanguage],
   color: '#fff',
-  backgroundColor: '#333',
+  backgroundColor: '#028be6',
   icon: AppIcon,
   app: App,
 });
