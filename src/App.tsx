@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 import { NuiProvider, useNuiEvent } from 'react-fivem-hooks';
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import GetWeatherText from './weatherText';
+
+import ImgBlizzard from './img/BLIZZARD.png';
+import ImgClearing from './img/CLEARING.png';
+import ImgClouds from './img/CLOUDS.png';
+import ImgExtrasunny from './img/EXTRASUNNY.png';
+import ImgHalloween from './img/HALLOWEEN.png';
+import ImgOvercast from './img/OVERCAST.png';
+import ImgRain from './img/RAIN.png';
+import ImgSmog from './img/SMOG.png';
+import ImgSnow from './img/SNOW.png';
+import ImgSnowlight from './img/SNOWLIGHT.png';
+import ImgThunder from './img/THUNDER.png';
+import ImgXmas from './img/XMAS.png';
 
 import { IPhoneSettings } from '@project-error/npwd-types';
 import { i18n } from 'i18next';
-import {
-  Theme,
-  StyledEngineProvider,
-  Paper,
-  Typography,
-  BottomNavigation,
-  BottomNavigationAction,
-} from '@mui/material';
+import { Theme, StyledEngineProvider, Paper } from '@mui/material';
 import ThemeSwitchProvider from './ThemeSwitchProvider';
 import { HomeRounded, InfoRounded } from '@mui/icons-material';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import { path } from '../npwd.config';
+import styles from './styles';
+import { WeatherForecast, WeatherTypes } from './types';
 
 const Container = styled(Paper)`
   flex: 1;
@@ -52,65 +61,82 @@ interface AppProps {
 }
 
 const App = (props: AppProps) => {
-  const history = useHistory();
-  const [count, setCount] = useState(0);
-  const { data } = useNuiEvent<string>({ event: 'RANDOM' });
+  const { data } = useNuiEvent<string>({ event: 'BD_FORECAST_UPDATE' });
 
-  const { pathname } = useLocation();
-  const [page, setPage] = useState(pathname);
+  // forecast eaquals data if not null, undefined, "null", or "undefined".
+  const forecast: WeatherForecast | null = data ? JSON.parse(data) : null;
 
-  const handleChange = (_e: any, newPage: any) => {
-    setPage(newPage);
+  const SelectImage = (weather: WeatherTypes) => {
+    switch (weather) {
+      case 'BLIZZARD':
+        return ImgBlizzard;
+      case 'CLEAR':
+        return ImgExtrasunny;
+      case 'CLEARING':
+        return ImgClearing;
+      case 'CLOUDS':
+        return ImgClouds;
+      case 'EXTRASUNNY':
+        return ImgExtrasunny;
+      case 'FOGGY':
+        return ImgSmog;
+      case 'HALLOWEEN':
+        return ImgHalloween;
+      case 'NEUTRAL':
+        return ImgClearing;
+      case 'OVERCAST':
+        return ImgOvercast;
+      case 'RAIN':
+        return ImgRain;
+      case 'SMOG':
+        return ImgSmog;
+      case 'SNOW':
+        return ImgSnow;
+      case 'SNOWLIGHT':
+        return ImgSnowlight;
+      case 'THUNDER':
+        return ImgThunder;
+      case 'XMAS':
+        return ImgXmas;
+    }
   };
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeSwitchProvider mode={props.theme.palette.mode}>
-        <Container square elevation={0}>
-          <Header>Template app</Header>
-          <Content>
-            <button onClick={() => history.push('/')} style={{ alignSelf: 'flex-start' }}>
-              Back
-            </button>
-
-            <div>
-              <h1>Template app - Heading 1</h1>
-              <h2>Data from client: {data}</h2>
-              <h3>You are at {page}</h3>
-
-              <p>Language is: {props.settings.language.label}</p>
-
-              <div>
-                <button onClick={() => setCount((prev) => prev + 1)}>+</button>
-                <button>{count}</button>
-                <button onClick={() => setCount((prev) => prev - 1)}>-</button>
-              </div>
+        <Container
+          square
+          elevation={0}
+          style={{
+            backgroundColor: 'skyblue',
+            display: 'block',
+          }}
+        >
+          <Header>Big Daddy's Hourly Forecast</Header>
+          <Content style={styles.mainContainer}>
+            <div style={styles.weatherContainer}>
+              {forecast ? (
+                forecast.splice(0, 6).map((item, index) => {
+                  return (
+                    <div key={index} style={styles.weatherCard}>
+                      <img
+                        src={SelectImage(item.weather)}
+                        style={styles.weatherImage}
+                        alt={item.weather as string}
+                      />
+                      <span>•</span>
+                      <div style={styles.weatherTextContainer}>
+                        <span style={styles.weatherText1}>{item.temp}&deg;</span>
+                        <span style={styles.weatherText2}>{GetWeatherText(item.weather)}</span>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <span>Loading Weather Data</span>
+              )}
             </div>
-
-            <Footer>
-              <LinkItem to="/">
-                <Typography>Home</Typography>
-              </LinkItem>
-            </Footer>
           </Content>
-
-          <BottomNavigation value={page} onChange={handleChange} showLabels>
-            <BottomNavigationAction
-              label={'Home'}
-              value="/home"
-              component={NavLink}
-              icon={<HomeRounded />}
-              to={path}
-            />
-            <BottomNavigationAction
-              label={'About'}
-              value="/about"
-              color="secondary"
-              component={NavLink}
-              icon={<InfoRounded />}
-              to={path}
-            />
-          </BottomNavigation>
         </Container>
       </ThemeSwitchProvider>
     </StyledEngineProvider>
@@ -124,3 +150,5 @@ const WithProviders: React.FC<AppProps> = (props) => (
 );
 
 export default WithProviders;
+
+/* Created by Whitigol Web Design */

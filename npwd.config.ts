@@ -3,20 +3,22 @@ import { AppIcon } from './icon';
 
 const defaultLanguage = 'en';
 const localizedAppName = {
-  en: 'APP_NAME',
+  en: 'Weather',
 };
 
 interface Settings {
   language: 'en';
 }
 
-export const path = '/npwd_app_template';
+export const path = '/npwd_BigDaddy_Weather';
 export default (settings: Settings) => ({
-  id: 'APP_NAME',
+  id: 'Weather',
   path,
   nameLocale: localizedAppName[settings?.language ?? defaultLanguage],
   color: '#fff',
-  backgroundColor: '#333',
+  backgroundColor: '#028be6',
   icon: AppIcon,
   app: App,
 });
+
+/* Created by Whitigol Web Design */

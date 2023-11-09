@@ -1,32 +1,13 @@
-let isFocused = false;
-const exps = global.exports
+const exps = global.exports;
 
-RegisterCommand(
-  'focus',
-  () => {
-    if (isFocused) {
-      SetNuiFocus(false, false);
-      SetNuiFocusKeepInput(false);
-      isFocused = false;
-      return;
-    }
+onNet('whitigol.weather:sendForecast', (forecast: any) => {
+  exps['npwd'].sendUIMessage({
+    type: 'BD_FORECAST_UPDATE',
+    payload: forecast,
+  });
+});
 
-    //SendNUIMessage({ type: 'RANDOM', payload: 'Hello from client' });
-    global.exports["npwd"].sendUIMessage('RANDOM', 'Hello from client');
+// Sync on connect
+emitNet('whitigol.weather:requestForecast', GetPlayerServerId(PlayerId()));
 
-    SetNuiFocusKeepInput(true);
-    SetNuiFocus(true, true);
-    isFocused = true;
-  },
-  false
-);
-
-RegisterCommand(
-  'unfocus',
-  () => {
-    SetNuiFocus(false, false);
-  },
-  false
-);
-
-RegisterKeyMapping('focus', 'Toggle Phone', 'keyboard', 'n');
+/* Created by Whitigol Web Design */
