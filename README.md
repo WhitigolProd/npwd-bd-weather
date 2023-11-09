@@ -8,6 +8,14 @@ This script is designed to work with [NPWD (New Phone Who Dis) by Project Error]
 - NPWD (Latest Version Preferred)
 - Big Daddy's Weather Script (v1.73+ ONLY)
 
+## Installation
+- Download the [latest release](https://github.com/WhitigolProd/npwd-bd-weather/releases/latest/download/npwd_BigDaddy_Weather.zip)
+- Extract the zip file
+- Copy the `npwd_BigDaddy_Weather` folder to your `resources` folder
+- Add `ensure npwd_BigDaddy_Weather` to your `server.cfg` (**MUST BE ABOVE `ensure npwd`!**)
+- Restart your server
+- Done 🎉
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
