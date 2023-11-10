@@ -3,6 +3,7 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
     "module": "esnext",
     "target": "es5",
     "jsx": "react",
